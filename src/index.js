@@ -14,11 +14,11 @@ const bookService = new BookService()
 ReactDOM.render(
     <Provider store={store}>
         <ErrorBoundry>
-            <BooksProvider value={bookService}>
+            <BooksProvider.Provider value={bookService}>
                 <Router>
                     <App />
                 </Router>
-            </BooksProvider>
+            </BooksProvider.Provider>
         </ErrorBoundry>
     </Provider>,
     document.getElementById('root')

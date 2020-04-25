@@ -1,5 +1,4 @@
 import React from "react";
-
 import {ErrorIndicator} from "../index";
 
 export default class extends React.Component {

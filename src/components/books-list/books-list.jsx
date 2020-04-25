@@ -1,28 +1,37 @@
-import React, {useEffect, useState} from "react";
-import {withBookStoreServices, BookItem, Spinner} from "../index";
+import React, {useContext, useEffect} from "react";
+import './books-list.css'
+import {BooksProvider, BookItem, Spinner, ErrorIndicator} from "../index";
+import {useSelector, useDispatch} from "react-redux";
+import {fetchBooks} from "../../actions";
 
 
-const BooksList = ({bookstoreService}) => {
-    const [books, setBooks] = useState({
-        books: [],
-        loading: true
-    });
+const BooksListContainer = () => {
+    const bookstoreService = useContext(BooksProvider);
+    const state = useSelector(s => ({
+        books: s.books,
+        error: s.error,
+        loading: s.loading
+    }));
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const respo = bookstoreService.getBooks();
-        setBooks({
-            books: respo,
-            loading: false
-        })
-    },[])
+        fetchBooks(bookstoreService, dispatch);
+    }, [bookstoreService, dispatch])
 
-    if (books.loading)
+    if (state.loading)
         return <Spinner/>
 
+    if (state.error)
+        return <ErrorIndicator/>
+
+    return <BooksList books={state.books}/>
+}
+
+const BooksList = ({books}) => {
     return (
-        <ul>
+        <ul className="books-list">
             {
-                books.books.map(item => (
+                books.map(item => (
                     <li key={item.id}>
                         <BookItem item={item}/>
                     </li>
@@ -32,4 +41,4 @@ const BooksList = ({bookstoreService}) => {
     )
 }
 
-export default withBookStoreServices()(BooksList)
+export default BooksListContainer

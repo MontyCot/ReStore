@@ -1,7 +1,7 @@
 import React from "react";
 
-export const {
-    Provider,
-    Consumer
-} = React.createContext();
+const BooksProvider = React.createContext();
 
+export {
+    BooksProvider
+}
