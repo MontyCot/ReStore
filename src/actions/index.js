@@ -20,6 +20,27 @@ const booksError = (error) => {
     }
 }
 
+const onIncrease = (bookId) => {
+    return {
+        type: 'BOOKS_INCREASE',
+        payload: bookId
+    }
+}
+
+const onDecrease = (bookId) => {
+    return {
+        type: 'BOOKS_DECREASE',
+        payload: bookId
+    }
+}
+
+const onDelete = (bookId) => {
+    return {
+        type: 'BOOKS_DELETE',
+        payload: bookId
+    }
+}
+
 const fetchBooks = (bookstoreService, dispatch) => {
     dispatch(booksRequsted())
     bookstoreService.getBooks()
@@ -28,5 +49,8 @@ const fetchBooks = (bookstoreService, dispatch) => {
 }
 
 export {
-    fetchBooks
+    fetchBooks,
+    onIncrease,
+    onDecrease,
+    onDelete
 }

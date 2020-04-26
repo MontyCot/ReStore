@@ -7,11 +7,14 @@ import {fetchBooks} from "../../actions";
 
 const BooksListContainer = () => {
     const bookstoreService = useContext(BooksProvider);
-    const state = useSelector(s => ({
-        books: s.books,
-        error: s.error,
-        loading: s.loading
-    }));
+    const state = useSelector(({booksList}) => {
+        return {
+            books: booksList.books,
+            error: booksList.error,
+            loading: booksList.loading
+        }
+    });
+
     const dispatch = useDispatch();
 
     useEffect(() => {
