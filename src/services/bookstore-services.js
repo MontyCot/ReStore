@@ -3,7 +3,7 @@ export default class BookstoreService {
 
     getBooks() {
         return new Promise((resolve, reject) => {
-            let time = Math.random() * 100
+            let time = Math.random() * 1500
             if(time < 100) {
                 reject('Error')
             }
