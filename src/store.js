@@ -1,18 +1,13 @@
-import {createStore} from "redux";
+import {applyMiddleware, createStore} from "redux";
+import thunkMiddleware from 'redux-thunk'
 import reducer from "./reducers";
 
-const enhancer = (createStore) => (...args) => {
-    const store = createStore(...args);
-    const originDispatch = store.dispatch;
-    store.dispatch = (action) => {
-        console.log(action.type);
-        return originDispatch(action)
-    }
-
-    return store
+const logMiddle = () => (next) => (action) => {
+    console.log(action.type)
+    return next(action)
 }
 
 
-const store = createStore(reducer, enhancer)
+const store = createStore(reducer, applyMiddleware(thunkMiddleware, logMiddle))
 
 export default store

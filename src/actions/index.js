@@ -41,7 +41,14 @@ const onDelete = (bookId) => {
     }
 }
 
-const fetchBooks = (bookstoreService, dispatch) => {
+// const fetchBooksOld = (bookstoreService, dispatch) => {
+//     dispatch(booksRequsted())
+//     bookstoreService.getBooks()
+//         .then(data => dispatch(booksLoaded(data)))
+//         .catch(error => dispatch(booksError(error)));
+// }
+
+const fetchBooksNew = (bookstoreService) => (dispatch) => {
     dispatch(booksRequsted())
     bookstoreService.getBooks()
         .then(data => dispatch(booksLoaded(data)))
@@ -49,7 +56,7 @@ const fetchBooks = (bookstoreService, dispatch) => {
 }
 
 export {
-    fetchBooks,
+    fetchBooksNew,
     onIncrease,
     onDecrease,
     onDelete

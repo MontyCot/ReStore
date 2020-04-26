@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from "react";
 import './books-list.css'
 import {BooksProvider, BookItem, Spinner, ErrorIndicator} from "../index";
 import {useSelector, useDispatch} from "react-redux";
-import {fetchBooks} from "../../actions";
+import {fetchBooksNew} from "../../actions";
 
 
 const BooksListContainer = () => {
@@ -18,7 +18,7 @@ const BooksListContainer = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchBooks(bookstoreService, dispatch);
+        dispatch(fetchBooksNew(bookstoreService))
     }, [bookstoreService, dispatch])
 
     if (state.loading)
